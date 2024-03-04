@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Marcin Gajkowski jako Absolwent</title> 
+  </head>
+  <body>
+    <div itemscope itemtype="http://schema.org/Person">
+      <span itemprop="name">Marcin Gajkowski</span>
+      <img src="gajkowski.jpg" itemprop="image" />
+      <meta itemprop="alumniOf" itemscope itemtype="http://schema.org/Organization" itemref="xxlo">
+      <meta itemprop="alumniOf" itemscope itemtype="http://schema.org/Organization" itemref="xlo">
+    </div>
+    <div id="xxlo">
+        <span itemprop="name">XXLO</span>
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress"> ul. Brzegi 55 </span>
+            <span itemprop="addressLocality">Gdańsk</span>,
+            <span itemprop="postalCode">22-110</span>
+        </div>
+    </div>
+    <div id="xlo">
+        <span itemprop="name">XLO (Gnr25)</span>
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress"> ul. Brzegi 52 </span>
+            <span itemprop="addressLocality">Gdańsk</span>,
+            <span itemprop="postalCode">11-220</span>
+        </div>
+    </div>
+  </body>
+</html>

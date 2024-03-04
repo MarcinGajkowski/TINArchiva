@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<rdf:RDF
+xmlns:rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:foaf = "http://xmlns.com/foaf/0.1/"
+xmlns:bio = "http://purl.org/vocab/bio/0.1/"
+>
+
+<foaf:Person rdf:ID="mgajkowski">
+   <foaf:name>Marcin Gajkowski</foaf:name>
+   <foaf:gender>Male</foaf:gender>
+   <foaf:givenname>Marcin</foaf:givenname>
+   <foaf:family_name>Gajkowski</foaf:family_name>
+   <bio:Graduation>
+    <rdf:Seq>
+        <rdf:li>
+            <foaf:Organization rdf:ID="xxlo">
+                <foaf:name>XX Liceum Ogólnokształczące</foaf:name>
+                <foaf:homepage rdf:resource="https://pja.edu.pl/"/> 
+                <bio:date>2020-06-18</bio:date>
+            </foaf:Organization>
+            
+        </rdf:li>
+        <rdf:li>
+            <foaf:Organization rdf:ID="xlo">
+                <foaf:name>X Liceum Ogólnokształczące (wcześniej Gimnazjum nr 25)</foaf:name>
+                <foaf:homepage rdf:resource="https://planzajec.pjwstk.edu.pl/"/> 
+                <bio:date>2017-06-26</bio:date>
+            </foaf:Organization>
+        </rdf:li>
+    </rdf:Seq>
+   </bio:Graduation>
+   <bio:alumniof>XX Liceum Ogólnokształczące</bio:alumniof>
+</foaf:Person>
+
+</rdf:RDF>

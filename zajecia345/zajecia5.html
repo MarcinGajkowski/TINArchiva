@@ -1,0 +1,255 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Super strona</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style type="text/css">
+            @font-face {
+                font-family: "Poppins";
+                src: url("Poppins-Regular.ttf");
+            }
+            body{
+                font-family: 'Poppins', sans-serif;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            header img{
+                width: 40%;
+                height: 10%;
+                padding: 10px;
+                margin: auto;
+            }
+            ul{
+                list-style-type: none;
+                margin: 0;
+                display: block;
+                float: right;
+                padding: 35px;
+                padding-top: 15px;
+                font-size: 20px;
+                height: 1em;
+                text-align: center;
+            }
+            ul li{
+                float: left;
+                height: 2em;
+                list-style-type: none;
+                width: 100px;
+                border-right: 1px solid red;
+            }
+            ul li:nth-child(4){
+                border-right: none;
+                padding-right: 5px;
+            }
+            ul li:nth-child(5){
+                border-right: none;
+                padding-right: 5px;
+            }
+            ul li a{
+                display: block;
+                color: crimson;
+                text-decoration: none;
+                padding: 5 5px;
+            }
+            ul li a:hover{
+                background-color: burlywood;
+            }
+            .topa .icon{
+                display: none;
+            }
+            header::after{
+                content: "";
+                display: table;
+                clear: both;
+            }
+            #content{
+                display: flex;
+            }
+            #content *{
+                flex-basis: 33%;
+                padding: 10px;
+            }
+            .kolos{
+                float: left;
+                display: block;
+                width: 32%;
+                padding: 10px;
+            }
+            .imgcol img{
+                width: 38%;
+                margin: auto;
+                padding: 5%;
+            }
+            #kol2::after{
+                content: "";
+                display: table;
+                clear: both;
+            }
+            footer{
+                background-color: black;
+                width: 100%;
+                padding: 15px;
+                margin: auto;
+                color: antiquewhite;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+            }
+            @media screen and (max-width: 768px){
+                header img{
+                    width: 95%;
+                }
+                ul{
+                    float: left;
+                    text-align: left;
+                    width: 85%;
+                }
+                ul li{
+                    width: 100%;
+                    border-bottom: 1px solid darkgray;
+                }
+                ul li:nth-child(1){
+                    border-right: none;
+                }
+                ul li:nth-child(2){
+                    border-right: none;
+                }
+                ul li:nth-child(3){
+                    border-right: none;
+                }
+                .topa li:not(:nth-child(5)) {
+                    display: none;
+                }
+                .topa a.icon {
+                    float: right;
+                    display: block;
+                }
+                #content{
+                    display: flex;
+                    flex-direction: column;
+                }
+                .kolos{
+                    float: none;
+                    width: 90%;
+                    margin: auto;
+                    padding-left: 30px;
+                }
+                #kol1 h2{
+                    padding-top: 125px;
+                    margin: auto;
+                }
+                .content::after{
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+                #kol2 h2{
+                    margin: auto;
+                }
+                .imgcol{
+                    width: 100%;
+                }
+                .imgcol img{
+                    width: 90%;
+                    padding: 30px;
+                }
+                #kol2::after{
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+                footer{
+                    bottom: 0;
+                    height: -3em;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .topa.responsive {
+                    position: relative;
+                }
+                .topa.responsive .icon {
+                    position: absolute;
+                    top: 15;
+                    right: 35;
+                }
+                .topa.responsive li {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                }
+                .topa.responsive li:nth-child(5) {
+                    border-bottom: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="toyotathon.png" alt="Ten dłuższy">
+            <ul class="topa" id="topa">
+                <li><a href="https://www.earlstewarttoyota.com/what-is-toyotathon/">Home</a></li>
+                <li><a href="https://pja.edu.pl/">O nas</a></li>
+                <li><a href="https://www.earlstewarttoyota.com/new-car-specials/">Oferta</a></li>
+                <li><a href="https://planzajec.pjwstk.edu.pl/Logowanie.aspx">Kontakt</a></li>
+                <li><a href="javascript:void(0);" class="icon" onclick="rozwiń()">
+                    <i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            
+        </header>
+        <div id="content">
+            <div id="kol1" class="kolos">
+                <h2>Toyotathon is ON!</h2>
+                <p>
+                    You hear the name mentioned in commercials every year. But, what does it mean? What is Toyotathon? <br />
+                    Toyotathon is a special event that happens once a year <br />during which Toyota features amazing offers on some of the most popular vehicles in its lineup. <br />
+                    A lot of our Palm Beach County customers like to take advantage of the unbelievable savings that are available during this event. <br />
+                    When is Toyotathon this year? Let’s talk below about Toyotathon 2020-2021 dates and what you can expect from Toyotathon. <br />
+                    And, don’t worry, even though the name sounds like “marathon”, there’s no running involved. <br />
+                    Though, you may feel like running to Earl Stewart Toyota once you hear about the incredible deals that are available! 
+                </p>
+            </div>
+            <div id="kol2" class="kolos">
+                <h2>Spong Bobe</h2>
+                <div class="imgrow">
+                    <div class="imgcol">
+                        <img src="Spingle is Fuckign Criiine !!! (sadge).jpg">
+                        <img src="Spingle is Standing there quaintly.jpg">
+                    </div>
+                    <div class="imgcol">
+                        <img src="Spingle about to have a giggle m8.gif">
+                        <img src="Spingle is Fuckign MAAAADDD! !.jpg">
+                    </div>
+                </div>
+            </div>
+            <div id="kol3" class="kolos">
+                <h2>What is Toyotathon?</h2>
+                <p>
+                    So, what is Toyotathon? It is a yearly event that showcases extremely low leasing and financing rates on some of your favorite Toyota automobiles.
+                    Folks come from Palm Beach Gardens and beyond to take advantage of these offers. <br />
+                    The specific offers that will be featured during Toyotathon haven’t been announced yet, 
+                    but keep watching our website for details, along with Toyotathon 2020-2021 dates. <br />
+                    <br />
+                    When is Toyotathon? Toyotathon normally takes place from mid-November through early January.
+                    The exact dates for Toyotathon 2020-2021 haven’t been announced yet. <br />
+                    But you can bet we will let you know as soon as they are. Keep watching this site for Toyotathon dates.
+                </p>
+            </div>
+        </div>
+        <footer>
+            <h3>&copy; Copyright KOLO 2023</h3>
+        </footer>
+        <script>
+            function rozwiń(){
+                var topa = document.getElementById("topa");
+                if (topa.className === "topa"){
+                    topa.className += " responsive";
+                }
+                else {
+                    topa.className = "topa";
+                }
+            }
+        </script>
+    </body>
+</html>
