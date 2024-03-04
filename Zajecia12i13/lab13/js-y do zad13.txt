@@ -1,0 +1,135 @@
+$(document).ready(function () {
+    $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/albums',
+        method: 'GET',
+        success: function (albums) {
+            const $albums = $('#albums');
+
+            albums.forEach(function (album) {
+                const $album = $('<div>').addClass('album').text(album.title);
+                $album.data('album-id', album.id);
+                $albums.append($album);
+            });
+
+            $albums.on('click', '.album', function () {
+                const albumId = $(this).data('album-id');
+                showGallery(albumId);
+            });
+        },
+    });
+
+    function showGallery(albumId) {
+        const $gallery = $('#gallery');
+        $gallery.empty();
+
+        $.ajax({
+            url: 'https://jsonplaceholder.typicode.com/photos?albumId=' + albumId,
+            method: 'GET',
+            success: function (photos) {
+                photos.forEach(function (photo) {
+                    const $photo = $('<img>').addClass('photo').attr('src', photo.thumbnailUrl);
+                    $photo.data('photo-url', photo.url);
+                    $gallery.append($photo);
+                });
+
+                $gallery.on('click', '.photo', function () {
+                    const $clickedPhoto = $(this);
+
+                    if ($clickedPhoto.hasClass('enlarged')) {
+                        // Zmniejszanie zdjęcia i przywracanie reszty zdjęć
+                        $clickedPhoto.removeClass('enlarged');
+                        $gallery.removeClass('enlarged');
+                    } else {
+                        // Powiększanie klikniętego zdjęcia i ukrywanie reszty zdjęć
+                        $gallery.find('.photo').removeClass('enlarged');
+                        $clickedPhoto.addClass('enlarged');
+                        $gallery.addClass('enlarged');
+                    }
+                });
+
+                $gallery.show();
+            },
+        });
+    }
+
+    function showLightbox(photoUrl) {
+        const $lightbox = $('<div>').addClass('lightbox');
+        const $img = $('<img>').attr('src', photoUrl);
+        const $overlay = $('<div>').addClass('overlay');
+
+        $lightbox.append($img);
+        $lightbox.append($overlay);
+        $('body').append($lightbox);
+
+        $overlay.on('click', function () {
+            $lightbox.remove();
+        });
+    }
+
+    $('#photoForm').on('submit', function (event) {
+        event.preventDefault();
+
+        const albumId = $('#albumId').val();
+        const title = $('#title').val();
+        const url = $('#url').val();
+        const thumbnailUrl = $('#thumbnailUrl').val();
+
+        const newPhoto = {
+            albumId: albumId,
+            title: title,
+            url: url,
+            thumbnailUrl: thumbnailUrl,
+        };
+
+        $.ajax({
+            url: 'https://jsonplaceholder.typicode.com/photos',
+            method: 'POST',
+            data: newPhoto,
+            success: function (response) {
+                console.log('Zdjęcie zostało dodane:', response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Błąd podczas dodawania zdjęcia:', error);
+            },
+        });
+
+        $('#photoForm')[0].reset();
+    });
+
+    $(document).ready(function () {
+        $('#addPhotoForm').on('submit', function (event) {
+            event.preventDefault();
+
+            const albumId = $('#albumId').val();
+            const title = $('#title').val();
+            const url = $('#url').val();
+            const thumbnailUrl = $('#thumbnailUrl').val();
+
+            const newPhoto = {
+                albumId: albumId,
+                title: title,
+                url: url,
+                thumbnailUrl: thumbnailUrl,
+            };
+
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/photos',
+                method: 'POST',
+                data: newPhoto,
+                success: function (response) {
+                    console.log('Zdjęcie zostało dodane:', response);
+                    $('#addPhotoForm')[0].reset();
+
+                    if (response.id) {
+                        console.log('Zdjęcie zostało pomyślnie dodane.');
+                    } else {
+                        console.log('Błąd podczas dodawania zdjęcia.');
+                    }
+                },
+                error: function (error) {
+                    console.error('Błąd podczas dodawania zdjęcia:', error);
+                },
+            });
+        });
+    });
+});

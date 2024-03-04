@@ -1,0 +1,62 @@
+$(document).ready(() => {
+  let lastStockData = null;
+  const lastNews = [];
+
+  const displayStockData = (stockData) => {
+    const tbody = $('#stock-table tbody');
+    tbody.empty();
+
+    Object.entries(stockData).forEach(([company, price]) => {
+      const row = $('<tr></tr>');
+      row.append(`<td>${company}</td>`);
+      row.append(`<td>${price}</td>`);
+      tbody.append(row);
+    });
+  };
+
+  const updateNewsRotator = (news) => {
+    lastNews.push(news);
+    if (lastNews.length > 3) {
+      lastNews.shift();
+    }
+
+    const rotator = $('#news-rotator');
+    rotator.empty();
+
+    lastNews.forEach((item) => {
+      const p = $('<p></p>').text(item);
+      rotator.append(p);
+    });
+  };
+
+  const hasStockDataChanged = (stockData) => {
+    if (lastStockData === null || JSON.stringify(stockData) !== JSON.stringify(lastStockData)) {
+      lastStockData = stockData;
+      return true;
+    }
+    return false;
+  };
+
+  const fetchData = () => {
+    $.ajax({
+      url: 'http://szuflandia.pjwstk.edu.pl/~ppisarski/zad8/dane.php',
+      type: 'GET',
+      dataType: 'json',
+      success: (response) => {
+        if (hasStockDataChanged(response.stock)) {
+          displayStockData(response.stock);
+        }
+
+        if (response.news) {
+          updateNewsRotator(response.news);
+        }
+      },
+      error: () => {
+        console.log('error');
+      }
+    });
+  };
+
+  fetchData();
+  setInterval(fetchData, 10000);
+});

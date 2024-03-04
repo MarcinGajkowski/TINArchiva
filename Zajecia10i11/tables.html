@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Tables have been generated.</title>
+    </head>
+    <style>
+        table, th, td{
+            border: 1px dashed;
+        }
+        table{
+            width: 85%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+    <body>
+        <table>
+
+        </table>
+
+        <script>
+            // function auto(rok, przebieg, cena_wyjsciowa, cena_koncowa){
+            //     this.rok = rok;
+            //     this.przebieg = przebieg;
+            //     this.cena_wyjsciowa = cena_wyjsciowa;
+            //     this.cena_koncowa = cena_koncowa;
+            // }
+
+            var auta2 = [        
+                { rok: 2005, przebieg: 420000, wyjściowa: 250000, końcowa: 800000},
+                { rok: 2008, przebieg: 280000, wyjściowa: 450000, końcowa: 720000},
+                { rok: 2013, przebieg: 550000, wyjściowa: 725000, końcowa: 890000},
+                { rok: 2002, przebieg: 218000, wyjściowa: 385000, końcowa: 475000}
+            ];
+
+            function twórzNagłówek(tabela, głowy) {
+                var thead = tabela.createTHead();
+                var row = thead.insertRow();
+                for (let key of głowy) {
+                    var th = document.createElement("th");
+                    var bebech = document.createTextNode(key);
+                    th.appendChild(bebech);
+                    row.appendChild(th);
+                }
+            }
+            var głowy = Object.keys(auta2[1]);
+
+            function twórzTabelę(tabela, dane) {
+                for (let element of dane) {
+                    var row = tabela.insertRow();
+                    for (key in element) {
+                        var komóra = row.insertCell();
+                        var bebech = document.createTextNode(element[key]);
+                        komóra.appendChild(bebech);
+                    }
+                }
+            }
+            var tabela = document.querySelector("table");
+            
+            twórzTabelę(tabela, auta2);
+            twórzNagłówek(tabela, głowy);
+        </script>
+    </body>
+</html>

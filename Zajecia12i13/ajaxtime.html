@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Zmień To z AJAXem</title>
+        <style>
+            table, th, td{
+                border: 1px dashed;
+            }
+            table{
+                width: 85%;
+                margin: auto;
+                border-collapse: collapse;
+            }
+            td{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+    <script>
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("demo").innerHTML =
+                this.responseText;
+            }
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+        // DOKOŃCZ U SIEBIE LMAO
+        // da się jeszcze zrobić 13 i 14
+
+        var auta2 = [        
+                { stock:{ firma1: 10, firma2: 10, firma3: 19, firma4: 49}, news: "piec"},
+                { stock:{ firma1: 87, firma2: 11, firma3: 94, firma4: 64}, news: "jeden"}
+
+            ];
+            // popracować nad dzieleniem obiektu wewnętrznego ❗ ❗ 💢
+            function twórzNagłówek(tabela, głowy) {
+                var thead = tabela.createTHead();
+                var row = thead.insertRow();
+                for (let key of głowy) {
+                    var th = document.createElement("th");
+                    var bebech = document.createTextNode(key);
+                    th.appendChild(bebech);
+                    row.appendChild(th);
+                }
+            }
+            var głowy = Object.keys(auta2[1]);
+
+            function twórzTabelę(tabela, dane) {
+                for (let element of dane) {
+                    var row = tabela.insertRow();
+                    for (key in element) {
+                        var komóra = row.insertCell();
+                        var bebech = document.createTextNode(element[key]);
+                        komóra.appendChild(bebech);
+                    }
+                }
+            }
+            var tabela = document.querySelector("table");
+            
+            twórzTabelę(tabela, auta2);
+            twórzNagłówek(tabela, głowy);
+    </script>
+</html>

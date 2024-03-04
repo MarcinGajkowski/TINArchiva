@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>DIV Magic</title>
+    </head>
+    <body id="thejuice">
+        <div id="d1" class="mainf">
+
+        </div>
+        <div id="d2" class="mainf">
+
+        </div>
+        <div id="d3" class="mainf">
+
+        </div>
+        <div id="d4" class="mainf">
+
+        </div>
+        <script>
+            var divisors = document.getElementsByClassName('mainf');
+
+            function quadruple(){
+                for(let i=0; i<divisors.length; i++){
+                    var newDiv = document.createElement('div');
+                    divisors[i].appendChild(newDiv);
+                }
+            }
+
+            function deleteFirst(){
+                var body = document.getElementById("thejuice");
+                body.removeChild(body.firstElementChild);
+            }
+
+            function changeBG(){
+                document.getElementById("d3").style.backgroundColor = 'aquamarine';
+            }
+
+            function nuText(){
+                var allDivs = document.getElementsByTagName('div');
+                for(let t=0; t<divisors.length; t++){
+                    allDivs[t].innerHTML = "nowy tekst<br>\n"; // ?????
+                }
+            }
+        </script>
+        <button onclick="quadruple()">Add 4 more!</button>
+        <button onclick="deleteFirst()">Delete first</button>
+        <button onclick="changeBG()">Change 3's BG</button>
+        <button onclick="nuText()">Add new text!</button>
+    </body>
+</html>

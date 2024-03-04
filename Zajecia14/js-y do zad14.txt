@@ -1,0 +1,181 @@
+//SERWER
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const folderPath = './files/';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  const { method, url } = req;
+
+  if (method === 'GET') {
+    const filename = getFilenameFromUrl(url);
+    if (filename) {
+      readFile(filename, res);
+    } else {
+      sendResponse(res, 404, 'Plik nie znaleziony');
+    }
+  } else if (method === 'POST') {
+    const filename = getFilenameFromUrl(url);
+    if (filename) {
+      handlePostRequest(req, filename, res);
+    } else {
+      sendResponse(res, 404, 'Plik nie znaleziony');
+    }
+  } else if (method === 'DELETE') {
+    const filename = getFilenameFromUrl(url);
+    if (filename) {
+      deleteFile(filename, res);
+    } else {
+      sendResponse(res, 404, 'Plik nie znaleziony');
+    }
+  } else {
+    sendResponse(res, 400, 'Złe zapytanie');
+  }
+});
+
+server.listen(port, () => {
+  console.log(`Serwer działa na porcie ${port}`);
+});
+
+
+const readFile = (filename, res) => {
+  const filePath = path.join(folderPath, filename);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      sendResponse(res, 500, `Błąd odczytania pliku: ${err}`);
+      return;
+    }
+
+    sendResponse(res, 200, data);
+  });
+};
+
+// POST
+const handlePostRequest = (req, filename, res) => {
+  const filePath = path.join(folderPath, filename);
+
+  let body = '';
+  req.on('data', (chunk) => {
+    body += chunk;
+  });
+
+  req.on('end', () => {
+    fs.appendFile(filePath, body, 'utf8', (err) => {
+      if (err) {
+        sendResponse(res, 500, `Błąd dodania zawartości do pliku: ${err}`);
+        return;
+      }
+
+      sendResponse(res, 200, 'Text dodany do pliku');
+    });
+  });
+};
+
+const deleteFile = (filename, res) => {
+  const filePath = path.join(folderPath, filename);
+
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      sendResponse(res, 500, `Błąd usuwania pliku: ${err}`);
+      return;
+    }
+
+    sendResponse(res, 200, 'Plik usuniety');
+  });
+};
+
+// HTTP
+const sendResponse = (res, statusCode, message) => {
+  res.writeHead(statusCode, { 'Content-Type': 'text/plain' });
+  res.end(message);
+};
+
+// NAZWA
+const getFilenameFromUrl = (url) => {
+  const parts = url.split('/');
+  return parts[1] ? parts[1] : null;
+};
+
+//ZAD 1
+const name = process.argv[2];
+
+if (!name) {
+  console.log('Brak argumentu');
+} else {
+  console.log(`Hello, ${name}!`);
+}
+
+//ZAD 2
+const fs = require('fs')
+const path = require('path')
+
+const folderPath = './files/'
+
+const readFromFile = filename => {
+	const filePath = path.join(folderPath, filename)
+
+	fs.readFile(filePath, 'utf8', (err, data) => {
+		if (err) {
+			console.error(`Błąd odczytu pliku: ${err}`)
+			return
+		}
+
+		console.log(`Zawartość pliku ${filename}:`)
+		console.log(data)
+	})
+}
+
+const appendToFile = (filename, text) => {
+	const filePath = path.join(folderPath, filename)
+
+	fs.appendFile(filePath, text, 'utf8', err => {
+		if (err) {
+			console.error(`Błąd dopisywania do pliku: ${err}`)
+			return
+		}
+
+		console.log(`Tekst został dopisany do pliku ${filename}`)
+	})
+}
+
+const deleteFile = filename => {
+	const filePath = path.join(folderPath, filename)
+
+	fs.unlink(filePath, err => {
+		if (err) {
+			console.error(`Błąd usuwania pliku: ${err}`)
+			return
+		}
+
+		console.log(`Plik ${filename} został usunięty`)
+	})
+}
+
+const command = process.argv[2]
+const filename = process.argv[3]
+const text = process.argv[4]
+
+if (!command || !filename) {
+	console.log('Podaj argumenty')
+} else {
+	switch (command) {
+		case 'open':
+			readFromFile(filename)
+			break
+		case 'append':
+			if (!text) {
+				console.log('Podaj tekst')
+			} else {
+				appendToFile(filename, text)
+			}
+			break
+		case 'delete':
+			deleteFile(filename)
+			break
+		default:
+			console.log('Nieznana komenda')
+	}
+}

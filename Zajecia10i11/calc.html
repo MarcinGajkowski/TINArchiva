@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calculator</title>
+        <style>
+            body{
+                background-color:dimgray;
+                position: relative;
+            }
+            #whole{
+                width: 40%;
+                position: absolute;
+                top: 40%;
+                left: 30%;
+                right: 0;
+                margin-top: -10px;
+            }
+            #result{
+                background-color: cadetblue;
+                border: 2px solid darkcyan;
+                font-size: larger;
+                font-weight: bolder;
+                text-align: right;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-right: 40px;
+            }
+            .row{
+                display: table-row;
+            }
+            .cell1{
+                display: table-cell;
+                color:darkslategray;
+            }
+            .cell2{
+                display: table-cell;
+                padding: 0px 5px;
+            }
+            #calc{
+                background-color: lightgray;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            #calf form{
+                display: table;
+                table-layout: fixed;
+            }
+            #submit{
+                display: block;
+                color: lightgray;
+                width: 70px;
+                height: 50px;
+                font-size: larger;
+                background-color: darkslategray;
+            }
+        </style>
+    </head>
+    <body id="thejuice">
+        <div id="whole">
+            <div id="result"></div>
+            <div id="calc" class="flex-container">
+                <form>
+                    <div class="row">
+                        <div class="cell1">
+                            <label for="first">Pierwsza liczba</label>
+                        </div>
+                        <div class="cell1">
+                            <label for="second">Druga liczba</label>
+                        </div>
+                        <div class="cell1">
+                            <label for="equation">Działanie:</label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cell2">
+                            <input type="text" name="first" id="one" class="cell">
+                        </div>
+                        <div class="cell2">
+                            <input type="text" name="second" id="two" class="cell">
+                        </div>
+                        <div class="cell2">
+                            <select id="equation" name="equation">
+                                <option value="add">+</option>
+                                <option value="sub">-</option>
+                                <option value="mul">*</option>
+                                <option value="div">/</option>
+                            </select>
+                        </div>
+                        <div class="cell2">
+                            <input type="button" id="submit" class="cell" 
+                            value="Oblicz" name="Oblicz" onclick="calcIt()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function calcIt(){
+                var first = parseFloat(document.getElementById("one").value);
+                var second = parseFloat(document.getElementById("two").value);
+                var equation = document.getElementById("equation").value;
+
+                var result = document.getElementById("result");
+
+                if(equation == "add"){
+                    result.innerHTML = first+second;
+                }
+                else if(equation == "sub"){
+                    result.innerHTML = first-second;
+                }
+                else if(equation == "mul"){
+                    result.innerHTML = first*second;
+                }
+                else if(equation == "div"){
+                    if(second == 0){
+                        result.innerHTML = "ERROR";
+                    }
+                    else{
+                        result.innerHTML = first/second;
+                    }
+                }
+            }
+            
+        </script>
+    </body>
+</html>
